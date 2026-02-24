@@ -31,8 +31,8 @@ export default function Footer() {
 
   return (
     <footer 
-      className={`fixed left-1/2 z-[100] w-auto -translate-x-1/2 px-4 transition-all duration-700 ease-in-out ${
-        isVisible ? 'bottom-6 opacity-100' : '-bottom-20 opacity-0'
+      className={`fixed left-1/2 z-[100] -translate-x-1/2 transition-all duration-700 ease-in-out ${
+        isVisible ? 'bottom-4 md:bottom-6 opacity-100' : '-bottom-20 opacity-0'
       }`}
       style={{ pointerEvents: isVisible ? 'auto' : 'none' }}
     >
@@ -40,17 +40,17 @@ export default function Footer() {
         href="https://klikdj.com" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="glass-card flex items-center justify-center gap-4 rounded-full px-6 py-2 transition-all hover:scale-105 cursor-pointer"
+        className="glass-card flex items-center justify-center gap-2 md:gap-4 rounded-full px-4 md:px-6 py-2 transition-all hover:scale-105 cursor-pointer w-[90vw] max-w-xs md:max-w-sm md:w-auto"
         style={{
           background: 'rgba(20, 20, 20, 0.8)',
           backdropFilter: 'blur(8px)',
           border: '1px solid rgba(139, 92, 246, 0.3)'
         }}
       >
-        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-violet-500/20 text-xs font-bold text-violet-400">
+        <div className="flex h-5 w-5 md:h-6 md:w-6 shrink-0 items-center justify-center rounded-full bg-violet-500/20 text-[10px] md:text-xs font-bold text-violet-400">
           K
         </div>
-        <div className="flex items-center gap-3 text-xs text-neutral-400">
+        <div className="flex items-center gap-2 md:gap-3 text-[10px] md:text-xs text-neutral-400">
           <span>Site par <span className="font-semibold text-violet-400">KLIK</span></span>
           <span className="opacity-30">|</span>
           <span>© {new Date().getFullYear()}</span>

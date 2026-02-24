@@ -107,53 +107,85 @@ export default function Actualites() {
           {/* Ligne centrale */}
           <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[var(--color-gold)]/30 to-transparent hidden md:block" />
 
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {currentActualites.map((actu, index) => {
               const [itemRef, itemVisible] = useScrollReveal({ threshold: 0.2 })
               return (
               <div
                 key={actu.id}
                 ref={itemRef}
-                className={`relative grid md:grid-cols-2 gap-6 items-center scroll-reveal ${itemVisible ? 'is-visible' : ''} ${
-                  index % 2 === 0 ? 'md:text-right' : 'md:flex-row-reverse'
-                }`}
+                className={`relative scroll-reveal ${itemVisible ? 'is-visible' : ''}`}
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
-                {/* Point sur la timeline */}
+                {/* Point sur la timeline - Desktop only */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
                   <div className="w-3 h-3 rounded-full bg-[var(--color-gold)] border-[3px] border-[#0a0a0a] shadow-lg shadow-[var(--color-gold)]/50" />
                 </div>
 
-                {/* Contenu */}
-                <div className={`${index % 2 === 0 ? 'md:pr-10' : 'md:pl-10 md:col-start-2'}`}>
-                  <div className="inline-block mb-3">
-                    <span className="rounded-full bg-[var(--color-gold)]/20 backdrop-blur-sm px-3 py-1 text-[10px] font-semibold text-[var(--color-gold)] border border-[var(--color-gold)]/30">
-                      {actu.date}
-                    </span>
-                  </div>
-                  <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-white mb-2">
-                    {actu.titre}
-                  </h3>
-                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-                    {actu.description}
-                  </p>
-                  <button className={`inline-flex items-center gap-2 mt-3 text-xs font-medium text-[var(--color-gold)] transition-all hover:gap-3 ${index % 2 === 0 ? '' : 'flex-row-reverse'}`}>
-                    Lire la suite
-                    <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d={index % 2 === 0 ? "M13 7l5 5m0 0l-5 5m5-5H6" : "M11 17l-5-5m0 0l5-5m-5 5h12"} />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Image */}
-                <div className={`${index % 2 === 0 ? 'md:col-start-2' : 'md:col-start-1 md:row-start-1'}`}>
-                  <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
+                {/* Mobile: Card verticale */}
+                <div className="md:hidden rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
+                  <div className="relative h-48 overflow-hidden">
                     <img
                       src={actu.image}
                       alt={actu.titre}
-                      className="h-40 w-full object-cover"
+                      className="h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                    <div className="absolute top-4 left-4">
+                      <span className="rounded-full bg-[var(--color-gold)]/20 backdrop-blur-sm px-3 py-1 text-[10px] font-semibold text-[var(--color-gold)] border border-[var(--color-gold)]/30">
+                        {actu.date}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-white mb-2">
+                      {actu.titre}
+                    </h3>
+                    <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
+                      {actu.description}
+                    </p>
+                    <button className="inline-flex items-center gap-2 text-xs font-medium text-[var(--color-gold)] transition-all hover:gap-3">
+                      Lire la suite
+                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Desktop: Timeline horizontale */}
+                <div className={`hidden md:grid md:grid-cols-2 gap-6 items-center ${
+                  index % 2 === 0 ? 'md:text-right' : 'md:flex-row-reverse'
+                }`}>
+                  <div className={`${index % 2 === 0 ? 'md:pr-10' : 'md:pl-10 md:col-start-2'}`}>
+                    <div className="inline-block mb-3">
+                      <span className="rounded-full bg-[var(--color-gold)]/20 backdrop-blur-sm px-3 py-1 text-[10px] font-semibold text-[var(--color-gold)] border border-[var(--color-gold)]/30">
+                        {actu.date}
+                      </span>
+                    </div>
+                    <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-white mb-2">
+                      {actu.titre}
+                    </h3>
+                    <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                      {actu.description}
+                    </p>
+                    <button className={`inline-flex items-center gap-2 mt-3 text-xs font-medium text-[var(--color-gold)] transition-all hover:gap-3 ${index % 2 === 0 ? '' : 'flex-row-reverse'}`}>
+                      Lire la suite
+                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d={index % 2 === 0 ? "M13 7l5 5m0 0l-5 5m5-5H6" : "M11 17l-5-5m0 0l5-5m-5 5h12"} />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div className={`${index % 2 === 0 ? 'md:col-start-2' : 'md:col-start-1 md:row-start-1'}`}>
+                    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
+                      <img
+                        src={actu.image}
+                        alt={actu.titre}
+                        className="h-40 w-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    </div>
                   </div>
                 </div>
               </div>

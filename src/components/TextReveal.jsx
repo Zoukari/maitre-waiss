@@ -23,7 +23,19 @@ export default function TextReveal() {
     }
   }
 
+  const handleTouchMove = (e) => {
+    if (cardRef.current && e.touches[0]) {
+      const rect = cardRef.current.getBoundingClientRect()
+      const relativeX = e.touches[0].clientX - rect.left
+      setWidthPercentage((relativeX / rect.width) * 100)
+    }
+  }
+
   const handleMouseEnter = () => {
+    setIsMouseOver(true)
+  }
+
+  const handleTouchStart = () => {
     setIsMouseOver(true)
   }
 
@@ -33,6 +45,13 @@ export default function TextReveal() {
       if (!isMouseOver) {
         setWidthPercentage(0)
       }
+    }, 100)
+  }
+
+  const handleTouchEnd = () => {
+    setIsMouseOver(false)
+    setTimeout(() => {
+      setWidthPercentage(0)
     }, 100)
   }
 
@@ -50,16 +69,21 @@ export default function TextReveal() {
             La justice en action
           </h2>
           <p className="mx-auto max-w-xl text-sm text-[var(--color-text-muted)]">
-            Survolez le texte pour révéler notre philosophie
+            <span className="hidden md:inline">Survolez le texte</span>
+            <span className="md:hidden">Glissez sur le texte</span>
+            {' '}pour révéler notre philosophie
           </p>
         </div>
 
         <div
           ref={cardRef}
-          className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] backdrop-blur-xl p-6 md:p-8 mb-10"
+          className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] backdrop-blur-xl p-6 md:p-8 mb-10 touch-none"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onMouseMove={handleMouseMove}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           style={{
             boxShadow: '0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)'
           }}

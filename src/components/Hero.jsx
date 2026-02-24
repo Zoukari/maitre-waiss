@@ -6,10 +6,9 @@ export default function Hero() {
     >
       {/* Background image - bien visible */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 bg-cover md:bg-contain bg-center"
         style={{ 
           backgroundImage: 'url(/hero.jpg)',
-          backgroundSize: '100%',
           backgroundPosition: 'center 75%',
           backgroundRepeat: 'no-repeat',
           filter: 'brightness(1.1) contrast(1.05)'

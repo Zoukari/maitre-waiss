@@ -12,6 +12,7 @@ export default function Header() {
   const [activeItem, setActiveItem] = useState('#accueil')
   const [isVisible, setIsVisible] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,7 +79,7 @@ export default function Header() {
       {/* Mobile Header */}
       <header className="md:hidden fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-2xl border-b border-white/10">
         <div className="flex items-center justify-between px-6 py-4">
-          <a href="#" className="flex items-center gap-2">
+          <a href="#accueil" className="flex items-center gap-2">
             <img
               src="/logo.jpeg"
               alt="Maître Waiss"
@@ -90,35 +91,47 @@ export default function Header() {
             />
           </a>
           
-          <a
-            href="#nous-contacter"
-            className="rounded-full bg-[var(--color-gold)] px-5 py-2 text-sm font-semibold text-black"
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 text-white transition-all hover:bg-white/20"
+            aria-label="Menu"
           >
-            Contact
-          </a>
+            <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-lg`} />
+          </button>
         </div>
-      </header>
 
-      {/* Mobile Dock Bottom */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-2xl border-t border-white/20 px-4 py-3">
-        <div className="flex items-center justify-around">
-          {navItems.map((item) => (
+        {/* Menu Burger Dropdown */}
+        {isMobileMenuOpen && (
+          <nav className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-2xl border-b border-white/10 py-4">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => {
+                  setActiveItem(item.href)
+                  setIsMobileMenuOpen(false)
+                }}
+                className={`flex items-center gap-4 px-6 py-4 transition-all ${
+                  activeItem === item.href 
+                    ? 'bg-[var(--color-gold)]/20 text-[var(--color-gold)] border-l-4 border-[var(--color-gold)]' 
+                    : 'text-white/70 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <i className={`${item.icon} text-lg w-6`} />
+                <span className="text-base font-medium">{item.label}</span>
+              </a>
+            ))}
             <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setActiveItem(item.href)}
-              className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all ${
-                activeItem === item.href 
-                  ? 'text-[var(--color-gold)]' 
-                  : 'text-white/70'
-              }`}
+              href="#nous-contacter"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-4 px-6 py-4 mt-2 mx-6 rounded-full bg-[var(--color-gold)] text-black font-semibold justify-center"
             >
-              <i className={`${item.icon} text-xl`} />
-              <span className="text-[10px] font-medium">{item.label}</span>
+              <i className="fas fa-envelope" />
+              <span>Nous contacter</span>
             </a>
-          ))}
-        </div>
-      </nav>
+          </nav>
+        )}
+      </header>
     </>
   )
 }
