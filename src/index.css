@@ -1,0 +1,523 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Montserrat", "Inter", sans-serif;
+  
+  /* Modern Minimal Palette - 2026 */
+  --color-bg: #121212;
+  --color-surface: #1E1E1E;
+  --color-card: #252525;
+  --color-elevated: #2C2C2C;
+  
+  /* Muted Gold - Elegant & Matte */
+  --color-gold: #D4C5A5;
+  --color-gold-light: #E8DEC8;
+  --color-gold-dark: #C0AF85;
+  
+  --color-sand: #E5E0D5;
+  --color-sand-muted: #9E9788;
+  --color-border: rgba(212, 197, 165, 0.15);
+  
+  --color-text: #F0F0F0;
+  --color-text-muted: #A0A0A0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-serif);
+  background: #0a0a0a;
+  background-image: 
+    radial-gradient(ellipse 100% 60% at 50% -20%, rgba(212, 197, 165, 0.12), transparent),
+    radial-gradient(ellipse 80% 50% at 20% 80%, rgba(212, 197, 165, 0.08), transparent),
+    radial-gradient(ellipse 70% 50% at 80% 60%, rgba(212, 197, 165, 0.06), transparent),
+    radial-gradient(circle at 10% 40%, rgba(255, 255, 255, 0.03), transparent),
+    radial-gradient(circle at 90% 70%, rgba(255, 255, 255, 0.02), transparent);
+  color: var(--color-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  position: relative;
+  z-index: 2;
+}
+
+/* Selection */
+::selection {
+  background: rgba(201, 169, 98, 0.3);
+  color: #fff;
+}
+
+/* Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 169, 98, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 169, 98, 0.5);
+}
+
+/* ============================================
+   HERO - Simple & Clean
+   ============================================ */
+
+/* ============================================
+   BORDER - Simple & Clean
+   ============================================ */
+.glow-border-wrapper {
+  position: relative;
+  border-radius: 24px;
+  padding: 0;
+  border: 1px solid rgba(212, 197, 165, 0.2);
+}
+
+.glow-border-wrapper:hover {
+  border-color: rgba(212, 197, 165, 0.4);
+}
+
+/* ============================================
+   FLIP CARD - Simple Hover Effect
+   ============================================ */
+.flip-card-container {
+  height: 100%;
+  min-height: 420px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.flip-card-front {
+  background: rgba(45, 42, 39, 0.6);
+  border: 1px solid rgba(212, 197, 165, 0.2);
+  opacity: 1;
+}
+
+.flip-card-back {
+  background: rgba(37, 34, 32, 0.8);
+  border: 1px solid rgba(212, 197, 165, 0.3);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+}
+
+.flip-card-container:hover .flip-card-front {
+  opacity: 0;
+}
+
+.flip-card-container:hover .flip-card-back {
+  opacity: 1;
+}
+
+/* ============================================
+   GOLD TEXT - Simple
+   ============================================ */
+.gold-gradient-text {
+  color: var(--color-gold);
+}
+
+/* ============================================
+   BUTTON EFFECTS - Ultra Glassy
+   ============================================ */
+.btn-gold {
+  border-radius: 16px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(212, 197, 165, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-gold:hover {
+  border-color: rgba(212, 197, 165, 0.6);
+  background: rgba(212, 197, 165, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(212, 197, 165, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   IMAGE EFFECTS - Minimal
+   ============================================ */
+.image-zoom {
+  transition: opacity 0.3s ease;
+  border-radius: 24px;
+}
+
+.image-zoom:hover {
+  opacity: 0.9;
+}
+
+.image-frame {
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 197, 165, 0.2);
+}
+
+/* ============================================
+   MODAL - Simple
+   ============================================ */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-box {
+  background: #1a1a1a;
+  border: 1px solid rgba(212, 197, 165, 0.2);
+  border-radius: 32px;
+}
+
+/* ============================================
+   CARDS - Ultra Glassy Effect
+   ============================================ */
+.card-rounded {
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card-rounded:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(212, 197, 165, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 16px 48px rgba(0, 0, 0, 0.5),
+    0 0 80px rgba(212, 197, 165, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   GLASS CARD - Ultra Glassy Effect
+   ============================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(212, 197, 165, 0.4);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(212, 197, 165, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+.section-dark {
+  background: #1a1a1a;
+  position: relative;
+}
+
+.section-divider {
+  height: 1px;
+  background: rgba(212, 197, 165, 0.2);
+}
+
+/* Marquee fade edges */
+.marquee-fade {
+  mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+}
+
+
+/* ============================================
+   TEXT EFFECTS
+   ============================================ */
+.text-luxury {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+}
+
+/* ============================================
+   COMPETENCES
+   ============================================ */
+.competence-icon {
+  background: linear-gradient(135deg, #C9A962, #D4BC7A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 3rem;
+}
+
+/* ============================================
+   INPUTS & FORMS
+   ============================================ */
+input, textarea, select {
+  border-radius: 16px !important;
+  background: rgba(30, 30, 30, 0.8) !important;
+  border: 1px solid rgba(212, 197, 165, 0.2) !important;
+  transition: all 0.2s !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: rgba(212, 197, 165, 0.4) !important;
+  outline: none !important;
+}
+
+
+/* ============================================
+   BADGES & TAGS
+   ============================================ */
+.badge-gold {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  border: 1px solid rgba(212, 197, 165, 0.3);
+  background: rgba(212, 197, 165, 0.05);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+}
+
+/* ============================================
+   STATS & NUMBERS
+   ============================================ */
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+  
+  .flip-card-container {
+    min-height: 380px;
+  }
+  
+  .glow-border-wrapper,
+  .flip-card-front,
+  .flip-card-back,
+  .card-rounded,
+  .modal-box,
+  .image-frame {
+    border-radius: 24px;
+  }
+}
+
+/* ============================================
+   FLIP WORDS ANIMATIONS
+   ============================================ */
+@keyframes fadeInWord {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes fadeInLetter {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scroll-reveal {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-reveal:not(.is-visible) {
+  opacity: 0;
+}
+
+.scroll-reveal.is-visible {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.scroll-reveal-left {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-reveal-left:not(.is-visible) {
+  opacity: 0;
+}
+
+.scroll-reveal-left.is-visible {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+.scroll-reveal-right {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-reveal-right:not(.is-visible) {
+  opacity: 0;
+}
+
+.scroll-reveal-right.is-visible {
+  animation: fadeInRight 0.8s ease-out forwards;
+}
+
+.scroll-reveal-scale {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-reveal-scale:not(.is-visible) {
+  opacity: 0;
+}
+
+.scroll-reveal-scale.is-visible {
+  animation: scaleIn 0.8s ease-out forwards;
+}
+
+.scroll-reveal-fade {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-reveal-fade:not(.is-visible) {
+  opacity: 0;
+}
+
+.scroll-reveal-fade.is-visible {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.rounded-xl { border-radius: 16px !important; }
+.rounded-2xl { border-radius: 24px !important; }
+.rounded-3xl { border-radius: 32px !important; }
+.rounded-full { border-radius: 9999px !important; }
